@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/family_name"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="true"
+        android:hint="@string/family_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="true"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="true"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hint="@string/age_hint"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:hint="@string/address_hint" />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:insetTop="6dp"
+        android:text="@string/signup_activity_title" />
+
+</LinearLayout>

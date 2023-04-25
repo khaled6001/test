@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">تطبيقي</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="email_hint">البريد الإلكتروني</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="address_hint">العنوان</string>
+    <string name="first_name">الاسم الأول</string>
+    <string name="family_name">الاسم العائلي</string>
+    <string name="age_hint">العمر</string>
+    <string name="login_activity_title">تسجيل الدخول</string>
+    <string name="signup_activity_title">التسجيل</string>
+    <string name="get_started">البدء</string>
+    <string name="already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="sign_up_failed">فشل التسجيل:</string>
+    <string name="verify_your_Internet">تحقق من اتصال الإنترنت الخاص بك</string>
+    <string name="login_button">Login</string>
+</resources>

@@ -1,0 +1,40 @@
+version: 2.1
+orbs:
+  android: circleci/android@1.2.2
+  sonarcloud: sonarcloud/sonarcloud-circleci-orb@1.0.1
+jobs:
+  build:
+    executor:
+      name: android/android-sdk-29
+      tag: v1.1.0
+    steps:
+      - checkout
+      - android/install-npm
+      - android/install-sdk:
+          components:
+            - build-tools-30.0.3
+            - android-30
+            - extra-google-m2repository
+            - extra-android-m2repository
+      - run:
+          name: Build and Test
+          command: ./gradlew clean createDebugCoverageReport sonarqube
+          environment:
+            SONAR_HOST_URL: https://sonarcloud.io
+            SONAR_ORGANIZATION: <charafeddinemechalikh>
+      - store_artifacts:
+          path: /app/build/reports/coverage/androidTest/debug/connected/
+          destination: report
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - android/build:
+          requires:
+            - android/checkout
+      - build:
+          requires:
+            - android/build
+      - sonarcloud/analyze:
+          requires:
+            - build

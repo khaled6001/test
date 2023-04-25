@@ -1,0 +1,72 @@
+name: test
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        EMULATOR_API: [16, 19, 21, 26, 33]
+        include:
+          - EMULATOR_API: 16
+            EMULATOR_ARCH: x86
+          - EMULATOR_API: 19
+            EMULATOR_ARCH: x86
+          - EMULATOR_API: 21
+            EMULATOR_ARCH: x86_64
+          - EMULATOR_API: 26
+            EMULATOR_ARCH: x86_64
+          - EMULATOR_API: 33
+            EMULATOR_ARCH: x86_64
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Checkout ACRA
+        uses: actions/checkout@v3
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: load AVD from cache for API ${{ matrix.android.version }}
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: emulator-${{ matrix.EMULATOR_API }}-${{ matrix.EMULATOR_ARCH }}
+
+      - name: create and cache AVD for API ${{ matrix.EMULATOR_API }}
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.EMULATOR_API }}
+          arch: ${{ matrix.EMULATOR_ARCH }}
+          target: 'google_apis'
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: run tests on API ${{ matrix.android.version }}
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.EMULATOR_API }}
+          arch: ${{ matrix.EMULATOR_ARCH }}
+          target: 'google_apis'
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew clean createDebugCoverageReport sonarqube --no-daemon

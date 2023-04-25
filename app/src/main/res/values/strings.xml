@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="address_hint">Address</string>
+    <string name="first_name">First name</string>
+    <string name="family_name">Family name</string>
+    <string name="age_hint">Age</string>
+    <string name="login_activity_title">Login</string>
+    <string name="signup_activity_title">Sign Up</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="sign_up_failed">Sign Up Failed :</string>
+
+
+
+    <string name="verify_your_Internet">Verify your Internet connection</string>
+    <string name="login_button">Login</string>
+
+
+</resources>
