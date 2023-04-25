@@ -32,7 +32,6 @@ public class SignUpActivity extends HttpActivity {
         PAGE = "signup.php";
         familyEditText = findViewById(R.id.family_name);
         firstEditText = findViewById(R.id.first_name);
-        ;
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         ageEditText = findViewById(R.id.age);

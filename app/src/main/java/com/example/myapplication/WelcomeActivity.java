@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { //+1
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkLogin();
         setContentView(R.layout.activity_welcome);
